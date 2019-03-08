@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .wrap {
+            height: 360px;
+            width: 500px;
+            border: 1px solid #c0c0c0;
+            margin: 80px auto;
+            padding:20px;
+            box-shadow: 0 0 20px rgba(0,0,0,.3);
+        }
+        h1{
+            margin-bottom:20px;
+        }
+        fieldset{
+            margin-bottom:20px;
+            padding:10px;
+        }
+        legend {
+            color: red;
+            margin-left: 15px;
+        }
+        span{
+            color:red;
+        }
+       .submit{
+           width: 40px;
+           height: 22px;
+       }
+       .space{
+           letter-spacing: 10px;
+           margin-right:-5px;
+       }
+       .space1{
+           margin-right:5px; margin-right:5px;
+       }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>毕业生信息</h1>
+        <form action="#" method="GET">
+            <fieldset>
+                <legend>学生信息</legend>
+                <span class="space">姓名</span><input type="text" name="user" required="required" autofocus="autofocus" placeholder="请输入姓名"><span>*</span><br>
+                <span class="space">学号</span><input type="text" name="number" required="required" placeholder="请输入学号"><span>*</span><br>
+                <span class="space">手机</span><input type="text" name="phone" required="required" placeholder="请输入手机号"><span>*</span><br>
+                <span class="space">邮箱</span><input type="mail" name="mail" list="names" autocomplete="on" required="required" placeholder="请输入邮箱地址"><span>*</span>
+                <datalist id="names">
+                    <option value="123@qq.com"></option>
+                    <option value="123@163.com"></option>
+                    <option value="123@gmail.com"></option>
+                    <option value="123@yahoo.com.cn"></option>
+                    <option value="123@126.com"></option>
+                </datalist>
+            </fieldset>
+            <fieldset>
+                <legend>录取情况</legend>
+                <span class="space1">录取学校</span><input type="search" name="school" list="schools" autocomplete="on"><br>
+                <datalist id="schools">
+                    <option>河北师范大学</option>
+                    <option>清华大学</option>
+                    <option>北京大学</option>
+                    <option>复旦大学</option>
+                    <option>上海交通大学</option>
+                </datalist>
+                <span class="space1">入学成绩</span><input type="number" name="score" ><br>
+                <span class="space1">入学时间</span><input type="date" name="time" >
+            </fieldset>
+            <input type="submit" class="submit">
+        </form>
+    </div>
+
+</body>
+
+</html>
