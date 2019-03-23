@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            width: 400px;
+            height: 180px;
+            padding: 10px;
+            margin: 80px auto;
+            overflow: hidden;
+            border: 1px solid #c0c0c0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .top {
+            width: 100%;
+        }
+
+        .in {
+            width: 190px;
+            height: 35px;
+        }
+
+        .out {
+            width: 140px;
+            height: 35px;
+            color: #959191;
+        }
+
+        .history {
+            position: relative;
+            width: 100%-10px;
+            font-size: 18px;
+        }
+
+        .history>span {
+            margin-right: 11px;
+            line-height: 35px;
+            background-color: rgb(218, 214, 214);
+        }
+
+        .cancel {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            font-size: 16px;
+            color: #fff;
+            text-align: center;
+            background-color: #959191;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="top">
+            <form action="#" method="GET">
+                <input type="text" placeholder="请输入想查找的商品" class="in">
+                <input type="button" value="搜索" class="out">
+            </form>
+        </div>
+        最近搜索:
+    </div>
+</body>
+<script>
+    var wrap = document.getElementsByClassName('wrap')[0];
+    var createDiv = document.createElement('div');
+    createDiv.setAttribute('class', 'history');
+    wrap.appendChild(createDiv);
+
+    function creatSpan(content) {
+        var sp = document.createElement('span');
+        sp.innerHTML = content;
+        return sp;
+    }
+
+    function loadStorage(str) {
+        var historyDiv = document.getElementsByClassName('history')[0];
+        var child = creatSpan(str);
+        historyDiv.appendChild(child);
+    }
+
+    var inDiv = document.getElementsByClassName('in')[0];
+    var outDiv = document.getElementsByClassName('out')[0];
+    var historyDiv = document.getElementsByClassName('history')[0];
+    var cancel = document.createElement('div');
+    cancel.innerHTML = 'X';
+    cancel.setAttribute('class', 'cancel');
+    historyDiv.appendChild(cancel);
+    var del = document.getElementsByClassName('cancel')[0];
+    del.onclick = function () {
+        historyDiv.innerHTML = '';
+        var cancel = document.createElement('div');
+        cancel.innerHTML = 'X';
+        cancel.setAttribute('class', 'cancel');
+        historyDiv.appendChild(cancel);
+        localStorage.clear();
+    }
+
+
+    outDiv.onclick = function () {
+        var str = inDiv.value;
+        if (str != null && str.length > 0) {
+            var time = new Date().getTime();
+            localStorage.setItem(time, str);
+            loadStorage(str);
+            inDiv.value = '';
+        }
+    }
+
+    var arr = new Array();
+    window.onload = function () {
+        for (var i = 0; i < localStorage.length; ++i) {
+            var key = localStorage.key(i);
+            var item = localStorage.getItem(key);
+            arr[i] = item;
+            loadStorage(arr[i]);
+        }
+    }
+</script>
+
+</html>
