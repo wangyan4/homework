@@ -86,7 +86,7 @@
         sp.innerHTML = content;
         return sp;
     }
-
+    //写入历史浏览记录框
     function loadStorage(str) {
         var historyDiv = document.getElementsByClassName('history')[0];
         var child = creatSpan(str);
@@ -100,6 +100,7 @@
     cancel.innerHTML = 'X';
     cancel.setAttribute('class', 'cancel');
     historyDiv.appendChild(cancel);
+    //删除历史记录
     var del = document.getElementsByClassName('cancel')[0];
     del.onclick = function () {
         historyDiv.innerHTML = '';
@@ -110,7 +111,7 @@
         localStorage.clear();
     }
 
-
+    //添加历史记录
     outDiv.onclick = function () {
         var str = inDiv.value;
         if (str != null && str.length > 0) {
@@ -121,14 +122,17 @@
         }
     }
 
-    var arr = new Array();
     window.onload = function () {
-        for (var i = 0; i < localStorage.length; ++i) {
-            var key = localStorage.key(i);
-            var item = localStorage.getItem(key);
-            arr[i] = item;
-            loadStorage(arr[i]);
+        if (!window.localStorage) {
+            alert('浏览器不支持');
+        } else {
+            for (var i = 0; i < localStorage.length; ++i) {
+                var key = localStorage.key(i);
+                var item = localStorage.getItem(key);
+                loadStorage(item);
+            }
         }
+
     }
 </script>
 
