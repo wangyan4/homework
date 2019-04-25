@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #mycav {
+            position: relative;
+            border: 1px solid magenta;
+        }
+
+        .wrap {
+            position: absolute;
+            left: 160px;
+            top: 160px;
+            color: red;
+
+        }
+
+        p {
+            font: bold 50px '微软雅黑';
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <p>一等奖</p>
+    </div>
+    <canvas id="mycav" width="500" height="500"></canvas>
+</body>
+<script>
+    var mycav = document.querySelector('#mycav');
+    var context = mycav.getContext('2d');
+    var text = document.querySelector('.wrap p');
+    var reward = ['特等奖', '一等奖', '二等奖', '三等奖', '谢谢惠顾']
+
+    function draw() {
+        //模拟中奖率
+        var ranNum = Math.ceil(Math.random() * 100);
+        switch (true) {
+            case ranNum <= 3:
+                text.innerHTML = reward[0];
+                break;
+            case ranNum <= 10:
+                text.innerHTML = reward[1];
+                break;
+            case ranNum <= 20:
+                text.innerHTML = reward[2];
+                break;
+            case ranNum <= 35:
+                text.innerHTML = reward[3];
+                break;
+            default:
+                text.innerHTML = reward[4];
+        }
+        context.clearRect(0, 0, mycav.width, mycav.height);
+        context.beginPath();
+        context.fillStyle = 'rgb(204,204,204)';
+        context.fillRect(0, 0, mycav.width, mycav.height);
+        context.closePath();
+    }
+
+    var count = 0;//用来统计未被刮开的像素数量
+    var sumNum = 0;//全部像素数量
+    var bool = true;//用来保证给全部像素数量赋值,只赋值一次
+
+    function jugle() {
+        var pixels = context.getImageData(0, 0, mycav.width, mycav.height);
+        count = 0;
+        for (var x = 0; x < pixels.width; x += 6) {
+            for (var y = 0; y < pixels.height; y += 6) {
+                var i = (y * pixels.width + x) * 4;
+                if (pixels.data[i] >= 127) {
+                    count++;
+                }
+            }
+        }
+        if (bool == true) {
+            bool = false;
+            sumNum = count;
+        } else {
+            if (count / sumNum < .6) {
+                context.clearRect(0, 0, mycav.width, mycav.height);
+            }
+        }
+
+    }
+
+    var offset = false;//用来标志鼠标按键状态true为按下
+    mycav.onmousedown = function () {
+        offset = true;
+    }
+    mycav.onmouseup = function () {
+        offset = false;
+    }
+    mycav.onmouseout = function () {
+        offset = false;
+    }
+    mycav.onclick = function (e) {
+        context.beginPath();
+        var newX = e.pageX - 8;
+        var newY = e.pageY - 8;
+        context.globalCompositeOperation = 'destination-out';
+        context.arc(newX, newY, 20, 0, 2 * Math.PI);
+        context.fill();
+        context.closePath();
+        jugle();
+    }
+    mycav.onmousemove = function (e) {
+        if (offset == true) {
+            context.beginPath();
+            context.globalCompositeOperation = 'destination-out';
+            var newX = e.pageX - 8;
+            var newY = e.pageY - 8;
+            context.arc(newX, newY, 20, 0, 2 * Math.PI);
+            context.fill();
+            context.closePath();
+            jugle();
+        }
+    }
+    window.onload = function () {
+        draw();
+    }
+</script>
+
+</html>
