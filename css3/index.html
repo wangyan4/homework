@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap {
+            width: 370px;
+            height: 430px;
+            border-top: 1px solid #eee;
+            border-left: 3px solid #eee;
+            border-right: 3px solid #eee;
+            border-bottom: 3px solid #eee;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img {
+            width: 100%;
+            height: 65%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img img{
+            width: 100%;
+            height: 100%;
+            transition: .8s;
+        }
+
+        .item {
+            width: 100%;
+            height: 360px;
+            background-color: #fff;
+            transform: translateY(-26px);
+            transition: .5s;
+        }
+
+        span {
+            display: block;
+            width: 55px;
+            height: 25px;
+            background-color: rgb(255, 105, 55);
+            color: #fff;
+            font-size: 12px;
+            line-height: 25px;
+            text-align: center;
+            transform: translateY(-25px);
+        }
+
+        .item h2 {
+            transform: translate(-120px, -10px);
+        }
+
+        .item p:nth-child(3) {
+            transform: translate(-70px, -15px);
+            font-size: 20px;
+            color: rgb(255, 105, 55);
+        }
+
+        .item p:nth-child(4) {
+            width: 320px;
+            transform: translate(18px, -30px);
+            color:rgb(118,122,119);
+            text-align: justify;
+            opacity: 0;
+            transition: .5s;
+        }
+
+        .wrap:hover .img img {
+            transform: scale(1.2);
+            filter:brightness(50%);
+        }
+
+        /* .wrap:hover .img::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0, 0, 0);
+            opacity: .4;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        } */
+
+        .wrap:hover .item {
+            position: absolute;
+            transform: translateY(-130px);
+            z-index: 2;
+        }
+
+        .wrap:hover p:nth-child(4) {
+            opacity: 1;
+        }
+
+        .wrap div:nth-child(3){
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(255, 105, 55);
+            color:#fff;
+            font-weight: bold;
+            position: absolute;
+            top:20px;
+            right:20px;
+            z-index: 2;
+        }
+        .wrap div:nth-child(3) p:first-child{
+            transform: translateY(-12px);
+        }
+        .wrap div:nth-child(3) p:last-child{
+            transform: translateY(-30px);
+        }
+        .wrap div:nth-child(4){
+            width: 100%;
+            height: 30px;
+            font-size: 12px;
+            color:#ccc;
+            position:absolute;
+            bottom:0;
+            left:0;
+            transform: translateX(-100px);
+            z-index: 3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="img">
+            <img src="zhanqiao.jpg" alt="">
+        </div>
+        <div class="item">
+            <span>照片</span>
+            <h2>青岛栈桥</h2>
+            <p>国家AAAA级旅游景区</p>
+            <p>青岛栈桥是青岛海滨风景区的景点之一，是国务院于1982年首批公布的国家级风景名胜区。
+                青岛栈桥位于游人如织的青岛中山路南端，桥身从海岸探入如弯月般的青岛湾深处。
+                桥身供游人参观并在此停靠旅游船，由此乘船可看海上青岛</p>
+        </div>
+        <div>
+            <p>15</p>
+            <p>五月</p>
+        </div>
+        <div>
+            <p>10分钟前&ensp;&ensp;&ensp;123条评论</p>
+        </div>
+    </div>
+</body>
+
+</html>
